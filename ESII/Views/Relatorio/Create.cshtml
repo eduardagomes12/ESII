@@ -1,0 +1,34 @@
+﻿@model ESII.Models.Relatorio
+@{
+    ViewData["Title"] = "Criar Relatório";
+}
+
+<h2>Criar Relatório</h2>
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Mes">Mês</label>
+        <input asp-for="Mes" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Ano">Ano</label>
+        <input asp-for="Ano" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="TotalHoras">Total de Horas</label>
+        <input asp-for="TotalHoras" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PrecoTotal">Preço Total</label>
+        <input asp-for="PrecoTotal" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PrecoHora">Preço por Hora</label>
+        <input asp-for="PrecoHora" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="UtilizadorId">ID do Utilizador</label>
+        <input asp-for="UtilizadorId" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Criar</button>
+</form>
+<a asp-action="Index">Voltar para a Lista</a>

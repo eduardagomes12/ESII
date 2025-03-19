@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ESII.Models.UtilizadorProjeto>
+@{
+    ViewData["Title"] = "Utilizadores em Projetos";
+}
+
+<h2>Lista de Utilizadores em Projetos</h2>
+<p>
+    <a asp-action="Create">Adicionar Novo</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Utilizador ID</th>
+        <th>Projeto ID</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.UtilizadorId</td>
+            <td>@item.ProjetoId</td>
+            <td>
+                <a asp-action="Details" asp-route-utilizadorId="@item.UtilizadorId" asp-route-projetoId="@item.ProjetoId">Detalhes</a> |
+                <a asp-action="Delete" asp-route-utilizadorId="@item.UtilizadorId" asp-route-projetoId="@item.ProjetoId">Remover</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,11 @@
+﻿@model ESII.Models.UtilizadorProjeto
+@{
+    ViewData["Title"] = "Detalhes do Utilizador no Projeto";
+}
+
+<h2>Detalhes do Utilizador no Projeto</h2>
+<div>
+    <p>Utilizador ID: @Model.UtilizadorId</p>
+    <p>Projeto ID: @Model.ProjetoId</p>
+</div>
+<a asp-action="Index">Voltar para a Lista</a>

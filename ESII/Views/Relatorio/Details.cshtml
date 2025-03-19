@@ -1,0 +1,17 @@
+﻿@model ESII.Models.Relatorio
+@{
+    ViewData["Title"] = "Detalhes do Relatório";
+}
+
+<h2>Detalhes do Relatório</h2>
+<div>
+    <h4>Mês: @Model.Mes</h4>
+    <p>ID: @Model.Id</p>
+    <p>Ano: @Model.Ano</p>
+    <p>Total de Horas: @Model.TotalHoras</p>
+    <p>Preço Total: @Model.PrecoTotal</p>
+    <p>Preço por Hora: @Model.PrecoHora</p>
+    <p>ID do Utilizador: @Model.UtilizadorId</p>
+</div>
+<a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+<a asp-action="Index">Voltar para a Lista</a>

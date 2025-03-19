@@ -1,0 +1,12 @@
+﻿@model ESII.Models.Cliente
+@{
+    ViewData["Title"] = "Cliente Details";
+}
+
+<h2>Cliente Details</h2>
+<div>
+    <h4>@Model.Nome</h4>
+    <p>ID: @Model.Id</p>
+</div>
+<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+<a asp-action="Index">Back to List</a>

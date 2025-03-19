@@ -1,0 +1,17 @@
+﻿@model ESII.Models.Convite
+@{
+    ViewData["Title"] = "Excluir Convite";
+}
+
+<h2>Excluir Convite</h2>
+<h3>Tem certeza que deseja excluir?</h3>
+<div>
+    <h4>Status: @Model.Status</h4>
+    <p>Data de Envio: @Model.DataEnvio?.ToString("dd/MM/yyyy")</p>
+    <p>Data de Resposta: @Model.DataResposta?.ToString("dd/MM/yyyy")</p>
+</div>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Excluir</button>
+</form>
+<a asp-action="Index">Voltar para a Lista</a>

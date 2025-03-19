@@ -1,0 +1,18 @@
+﻿@model ESII.Models.Tarefa
+@{
+    ViewData["Title"] = "Detalhes da Tarefa";
+}
+
+<h2>Detalhes da Tarefa</h2>
+<div>
+    <h4>@Model.Descricao</h4>
+    <p>ID: @Model.Id</p>
+    <p>Data Início: @Model.DataInicio?.ToString("dd/MM/yyyy")</p>
+    <p>Data Fim: @Model.DataFim?.ToString("dd/MM/yyyy")</p>
+    <p>Preço: @Model.Preco</p>
+    <p>Status: @Model.Status</p>
+    <p>Projeto: @Model.ProjetoId</p>
+    <p>Utilizador: @Model.UtilizadorId</p>
+</div>
+<a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+<a asp-action="Index">Voltar para a Lista</a>

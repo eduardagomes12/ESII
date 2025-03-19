@@ -1,0 +1,14 @@
+﻿@model ESII.Models.Convite
+@{
+    ViewData["Title"] = "Detalhes do Convite";
+}
+
+<h2>Detalhes do Convite</h2>
+<div>
+    <h4>Status: @Model.Status</h4>
+    <p>ID: @Model.Id</p>
+    <p>Data de Envio: @Model.DataEnvio?.ToString("dd/MM/yyyy")</p>
+    <p>Data de Resposta: @Model.DataResposta?.ToString("dd/MM/yyyy")</p>
+</div>
+<a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+<a asp-action="Index">Voltar para a Lista</a>

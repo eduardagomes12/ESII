@@ -1,0 +1,21 @@
+﻿@model ESII.Models.Tarefa
+@{
+    ViewData["Title"] = "Excluir Tarefa";
+}
+
+<h2>Excluir Tarefa</h2>
+<h3>Tem certeza que deseja excluir?</h3>
+<div>
+    <h4>@Model.Descricao</h4>
+    <p>Data Início: @Model.DataInicio?.ToString("dd/MM/yyyy")</p>
+    <p>Data Fim: @Model.DataFim?.ToString("dd/MM/yyyy")</p>
+    <p>Preço: @Model.Preco</p>
+    <p>Status: @Model.Status</p>
+    <p>Projeto: @Model.ProjetoId</p>
+    <p>Utilizador: @Model.UtilizadorId</p>
+</div>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Excluir</button>
+</form>
+<a asp-action="Index">Voltar para a Lista</a>

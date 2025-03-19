@@ -1,0 +1,17 @@
+﻿@model ESII.Models.UtilizadorProjeto
+@{
+    ViewData["Title"] = "Remover Utilizador do Projeto";
+}
+
+<h2>Remover Utilizador do Projeto</h2>
+<h3>Tem certeza que deseja remover?</h3>
+<div>
+    <p>Utilizador ID: @Model.UtilizadorId</p>
+    <p>Projeto ID: @Model.ProjetoId</p>
+</div>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="UtilizadorId" />
+    <input type="hidden" asp-for="ProjetoId" />
+    <button type="submit" class="btn btn-danger">Remover</button>
+</form>
+<a asp-action="Index">Voltar para a Lista</a>

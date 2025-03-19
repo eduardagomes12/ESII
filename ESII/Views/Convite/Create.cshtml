@@ -1,0 +1,22 @@
+﻿@model ESII.Models.Convite
+@{
+    ViewData["Title"] = "Criar Convite";
+}
+
+<h2>Criar Convite</h2>
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <input asp-for="Status" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DataEnvio"></label>
+        <input asp-for="DataEnvio" type="date" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DataResposta"></label>
+        <input asp-for="DataResposta" type="date" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Criar</button>
+</form>
+<a asp-action="Index">Voltar para a Lista</a>

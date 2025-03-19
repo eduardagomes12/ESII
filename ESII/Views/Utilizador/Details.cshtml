@@ -1,0 +1,13 @@
+﻿@model ESII.Models.Utilizador
+@{
+    ViewData["Title"] = "Detalhes do Utilizador";
+}
+
+<h2>Detalhes do Utilizador</h2>
+<div>
+    <h4>Nome: @Model.Nome</h4>
+    <p>Email: @Model.Email</p>
+    <p>Horas por Dia: @Model.HorasDia</p>
+</div>
+<a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+<a asp-action="Index">Voltar para a Lista</a>
