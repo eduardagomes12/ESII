@@ -1,8 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ESII.Models;
-using Microsoft.EntityFrameworkCore;
-
 [Route("api/[controller]")]
 [ApiController]
 public class UtilizadorController : ControllerBase

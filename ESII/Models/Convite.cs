@@ -1,28 +1,24 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ESII.Models;
 
 namespace ESII.Models
 {
-    [Table("convite")]  // Define explicitamente o nome correto da tabela
     public class Convite
     {
         [Key]
-        [Column("id")]
         public int Id { get; set; }
 
-        [Column("status")]
+        [MaxLength(50)]
         public string? Status { get; set; }
 
-        [Column("dataenvio")]
         public DateTime? DataEnvio { get; set; }
-
-        [Column("dataresposta")]
         public DateTime? DataResposta { get; set; }
 
-        [Column("utilizadorid")]
         public int? UtilizadorId { get; set; }
+        public Utilizador? Utilizador { get; set; }
 
-        [Column("projetoid")]
         public int? ProjetoId { get; set; }
+        public Projeto? Projeto { get; set; }
     }
 }

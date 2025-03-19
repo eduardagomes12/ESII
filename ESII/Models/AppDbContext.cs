@@ -1,12 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ESII.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace ESII.Models
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<Utilizador>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        {
-        }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Utilizador> Utilizadores { get; set; }
@@ -16,7 +18,7 @@ namespace ESII.Models
         public DbSet<RelatorioProj> RelatoriosProjetos { get; set; }
         public DbSet<Tarefa> Tarefas { get; set; }
         public DbSet<UtilizadorProjeto> UtilizadoresProjetos { get; set; }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Mapeia as entidades para os nomes das tabelas existentes no PostgreSQL
@@ -35,5 +37,8 @@ namespace ESII.Models
 
             base.OnModelCreating(modelBuilder);
         }
+
+
+        
     }
 }

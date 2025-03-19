@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ESII.Models;
 using Microsoft.EntityFrameworkCore;
-
 [Route("api/[controller]")]
 [ApiController]
 public class RelatorioController : ControllerBase

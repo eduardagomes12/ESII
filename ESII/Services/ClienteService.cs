@@ -1,7 +1,6 @@
 ﻿using ESII.Models;
 using Microsoft.EntityFrameworkCore;
 
-
 public class ClienteService
 
 {

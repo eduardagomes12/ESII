@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ESII.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace ESII.Controllers
 {

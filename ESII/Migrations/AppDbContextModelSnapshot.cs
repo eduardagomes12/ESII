@@ -54,36 +54,34 @@ namespace ESII.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
+                        .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("DataEnvio")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("dataenvio");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime?>("DataResposta")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("dataresposta");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int?>("ProjetoId")
-                        .HasColumnType("integer")
-                        .HasColumnName("projetoid");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Status")
-                        .HasColumnType("text")
-                        .HasColumnName("status");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<int?>("UtilizadorId")
-                        .HasColumnType("integer")
-                        .HasColumnName("utilizadorid");
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UtilizadorId1")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProjetoId");
 
-                    b.HasIndex("UtilizadorId");
+                    b.HasIndex("UtilizadorId1");
 
                     b.ToTable("convite", (string)null);
                 });
@@ -107,11 +105,14 @@ namespace ESII.Migrations
                     b.Property<int?>("UtilizadorId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("UtilizadorId1")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
 
-                    b.HasIndex("UtilizadorId");
+                    b.HasIndex("UtilizadorId1");
 
                     b.ToTable("projeto", (string)null);
                 });
@@ -142,9 +143,12 @@ namespace ESII.Migrations
                     b.Property<int?>("UtilizadorId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("UtilizadorId1")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("UtilizadorId");
+                    b.HasIndex("UtilizadorId1");
 
                     b.ToTable("relatorio", (string)null);
                 });
@@ -212,46 +216,96 @@ namespace ESII.Migrations
                     b.Property<int?>("UtilizadorId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("UtilizadorId1")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProjetoId");
 
                     b.HasIndex("RelatorioProjId");
 
-                    b.HasIndex("UtilizadorId");
+                    b.HasIndex("UtilizadorId1");
 
                     b.ToTable("tarefa", (string)null);
                 });
 
             modelBuilder.Entity("ESII.Models.Utilizador", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean");
 
                     b.Property<decimal?>("HorasDia")
                         .HasColumnType("numeric");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("utilizador", (string)null);
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("ESII.Models.UtilizadorProjeto", b =>
@@ -262,22 +316,164 @@ namespace ESII.Migrations
                     b.Property<int>("ProjetoId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("UtilizadorId1")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("UtilizadorId", "ProjetoId");
 
                     b.HasIndex("ProjetoId");
 
+                    b.HasIndex("UtilizadorId1");
+
                     b.ToTable("utilizadorprojeto", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("ESII.Models.Convite", b =>
                 {
-                    b.HasOne("ESII.Models.Projeto", null)
+                    b.HasOne("ESII.Models.Projeto", "Projeto")
                         .WithMany("Convites")
                         .HasForeignKey("ProjetoId");
 
-                    b.HasOne("ESII.Models.Utilizador", null)
+                    b.HasOne("ESII.Models.Utilizador", "Utilizador")
                         .WithMany("Convites")
-                        .HasForeignKey("UtilizadorId");
+                        .HasForeignKey("UtilizadorId1");
+
+                    b.Navigation("Projeto");
+
+                    b.Navigation("Utilizador");
                 });
 
             modelBuilder.Entity("ESII.Models.Projeto", b =>
@@ -288,7 +484,7 @@ namespace ESII.Migrations
 
                     b.HasOne("ESII.Models.Utilizador", "Utilizador")
                         .WithMany("Projetos")
-                        .HasForeignKey("UtilizadorId");
+                        .HasForeignKey("UtilizadorId1");
 
                     b.Navigation("Cliente");
 
@@ -299,7 +495,7 @@ namespace ESII.Migrations
                 {
                     b.HasOne("ESII.Models.Utilizador", "Utilizador")
                         .WithMany("Relatorios")
-                        .HasForeignKey("UtilizadorId");
+                        .HasForeignKey("UtilizadorId1");
 
                     b.Navigation("Utilizador");
                 });
@@ -331,7 +527,7 @@ namespace ESII.Migrations
 
                     b.HasOne("ESII.Models.Utilizador", "Utilizador")
                         .WithMany("Tarefas")
-                        .HasForeignKey("UtilizadorId");
+                        .HasForeignKey("UtilizadorId1");
 
                     b.Navigation("Projeto");
 
@@ -350,13 +546,64 @@ namespace ESII.Migrations
 
                     b.HasOne("ESII.Models.Utilizador", "Utilizador")
                         .WithMany()
-                        .HasForeignKey("UtilizadorId")
+                        .HasForeignKey("UtilizadorId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Projeto");
 
                     b.Navigation("Utilizador");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("ESII.Models.Utilizador", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("ESII.Models.Utilizador", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ESII.Models.Utilizador", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("ESII.Models.Utilizador", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ESII.Models.Projeto", b =>
