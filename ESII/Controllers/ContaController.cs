@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ESII.ViewModels;
-using ESII.Models;  // ✅ Importar a model Utilizador
+using ESII.Models;  
 using System.Threading.Tasks;
 
 namespace ESII.Controllers
 {
     public class ContaController : Controller
     {
-        private readonly UserManager<Utilizador> _userManager;  // ✅ Alterado para Utilizador
-        private readonly SignInManager<Utilizador> _signInManager;  // ✅ Alterado para Utilizador
+        private readonly UserManager<Utilizador> _userManager;  
+        private readonly SignInManager<Utilizador> _signInManager; 
 
         public ContaController(UserManager<Utilizador> userManager, SignInManager<Utilizador> signInManager)
         {
@@ -53,7 +53,7 @@ namespace ESII.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var user = new Utilizador { UserName = model.Email, Email = model.Email }; // ✅ Alterado para Utilizador
+            var user = new Utilizador { UserName = model.Email, Email = model.Email }; 
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
